@@ -19,15 +19,42 @@
 
                     {{-- tasks --}}
                     @foreach ($project->tasks as $task)
-                        <div class="card mb-3">{{ $task->body }}</div>
+                        <div class="card mb-3">
+                            <form method="POST" action="{{ $project->path() . '/tasks/' . $task->id }}">
+                                @method('PATCH')
+                                @csrf
+                                <div class="flex items-center">
+                                    <input type="text" name="body" value="{{ $task->body }}"
+                                           class="w-full {{ $task->completed ? 'text-grey' : '' }}">
+                                    <input type="checkbox" name="completed"
+                                           onchange="this.form.submit()" {{ $task->completed ? 'checked' : '' }}>
+                                </div>
+                            </form>
+                        </div>
                     @endforeach
+
+                    <div class="card mb-3">
+                        <form action="{{ $project->path() . '/tasks' }}" method="POST">
+                            @csrf
+                            <input type="text" placeholder="Add a new task..."
+                                   name="body" class="w-full">
+                        </form>
+                    </div>
                 </div>
 
                 <div>
                     <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
 
                     {{-- general notes --}}
-                    <textarea class="card w-full" style="min-height: 200px">Lorem ipsum.</textarea>
+                    <form action="{{ $project->path() }}" method="POST">
+                        @method('PATCH')
+                        @csrf
+                        <textarea class="card w-full"
+                                  name="notes"
+                                  placeholder="Anything special you want to make note of?"
+                                  style="min-height: 200px">{{ $project->notes }}</textarea>
+                        <button type="submit" class="button">Save</button>
+                    </form>
                 </div>
             </div>
 
