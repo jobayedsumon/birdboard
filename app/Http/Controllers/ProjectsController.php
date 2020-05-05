@@ -9,7 +9,7 @@ class ProjectsController extends Controller
     /**
      * View all projects.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function index()
     {
@@ -23,7 +23,7 @@ class ProjectsController extends Controller
      *
      * @param \App\Project $project
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show(Project $project)
     {
@@ -35,7 +35,7 @@ class ProjectsController extends Controller
     /**
      * Create a new project.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function create()
     {
@@ -49,23 +49,36 @@ class ProjectsController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'notes' => 'min:3'
-        ]);
+        $attributes = $this->validateRequest();
 
         $project = auth()->user()->projects()->create($attributes);
 
         return redirect($project->path());
     }
 
+    public function edit(Project $project)
+    {
+        return view('projects.edit', compact('project'));
+    }
+
     public function update(Project $project)
     {
         $this->authorize('update', $project);
 
-        $project->update(request(['notes']));
+        $project->update($this->validateRequest());
 
         return redirect($project->path());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'sometimes|required',
+            'description' => 'sometimes|required',
+            'notes' => 'nullable'
+        ]);
     }
 }

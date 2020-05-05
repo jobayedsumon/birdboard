@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Facades\Tests\Setup\ProjectFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -28,11 +29,9 @@ class ProjectTest extends TestCase
     /** @test */
     public function it_can_add_a_task()
     {
-        $project = factory('App\Project')->create();
-
-        $task = $project->addTask('Test task');
+        $project = ProjectFactory::withTasks(1)->create();
 
         $this->assertCount(1, $project->tasks);
-        $this->assertTrue($project->tasks->contains($task));
+        $this->assertTrue($project->tasks->contains($project->tasks[0]));
     }
 }
