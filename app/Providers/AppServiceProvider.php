@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Observers\ProjectObserve;
+use App\Observers\TaskObserver;
 use App\Project;
+use App\Task;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Project::observe(ProjectObserve::class);
+        Task::observe(TaskObserver::class);
     }
 
     /**
