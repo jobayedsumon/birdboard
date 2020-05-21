@@ -49,7 +49,7 @@
 }
 
 .card {
-    @apply .bg-white .p-5 .rounded-lg .shadow;
+    @apply .bg-grey-light .p-5 .rounded-lg .shadow;
 }
 
 /**
@@ -76,3 +76,9 @@
  * @import "utilities/background-patterns";
  * @import "utilities/skew-transforms";
  */
+
+//:root {
+//    --page-backgroud-color: red;
+//    --card-backgroud-color: black;
+//    --button-backgroud-color: white;
+//}
