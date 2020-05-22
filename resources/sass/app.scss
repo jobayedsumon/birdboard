@@ -43,13 +43,19 @@
     @apply .px-4;
 }
 
-.button {
-    @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
-    box-shadow: 0 2px 7px 0 #b0eaff;
-}
+
 
 .card {
     @apply .bg-grey-light .p-5 .rounded-lg .shadow;
+}
+
+.button {
+    @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
+    box-shadow: 0 2px 7px 0 #b0eaff;
+
+    &.is-outlined {
+        @apply .bg-grey-light .text-blue .border .border-blue;
+    }
 }
 
 /**

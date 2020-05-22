@@ -573,6 +573,13 @@ table {
   padding-right: 1rem;
 }
 
+.card {
+  background-color: #f5f6f9;
+  padding: 1.25rem;
+  border-radius: .5rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .08);
+}
+
 .button {
   background-color: #47cdff;
   color: #fff;
@@ -586,11 +593,11 @@ table {
   box-shadow: 0 2px 7px 0 #b0eaff;
 }
 
-.card {
+.button.is-outlined {
   background-color: #f5f6f9;
-  padding: 1.25rem;
-  border-radius: .5rem;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .08);
+  color: #47cdff;
+  border-width: 1px;
+  border-color: #47cdff;
 }
 
 /**
